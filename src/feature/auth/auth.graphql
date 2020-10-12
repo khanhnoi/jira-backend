@@ -1,0 +1,28 @@
+type AccessToken {
+  token: String!
+}
+
+input InputLogin {
+  username: String!
+  password: String!
+}
+
+input InputRegister {
+  username: String!
+  password: String!
+  passwordCheck: String!
+  fullname: String
+  isAdmin: Boolean
+  email: String
+  age: Float
+  gender: UserGender
+}
+
+type Query {
+  getPermissionByUserId(userId: ID): [Permission]!
+}
+
+type Mutation {
+  register(userData: InputRegister!): User!
+  login(userData: InputLogin!): AccessToken!
+}

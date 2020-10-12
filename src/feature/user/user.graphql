@@ -1,0 +1,48 @@
+type Role {
+  id: ID!
+  name: String!
+  permissions: [Permission]
+}
+
+type Permission {
+  id: ID!
+  scope: String!
+}
+input InputUpdateUser {
+  level: String!,
+  skill:String!,
+  status: UserStatus!
+}
+type User {
+  id: ID!
+  username: String!
+  fullname: String
+  roles: [Role]
+  status: UserStatus
+  email: String
+  skill: String
+  level: String
+  age: Float
+  gender: UserGender
+
+}
+
+type Query {
+  getUsers: [User]
+}
+
+type Mutation {
+  updateUser(id: ID, updateInfo: InputUpdateUser): User!
+}
+
+enum UserStatus {
+  Unactivated,
+  Activated,
+  Blocked
+}
+
+enum UserGender {
+  Male,
+  Female,
+  Others,
+}

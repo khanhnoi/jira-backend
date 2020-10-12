@@ -1,0 +1,37 @@
+type Epic {
+    id: ID!
+    name: String!
+    description: String!
+    startDate: Date! @date
+    endDate: Date! @date
+    projectId: Float!
+}
+
+input InputCreateEpic {
+    name: String!
+    description: String!
+    startDate: Date! @date
+    endDate: Date! @date
+    projectId: Float!
+}
+
+input InputUpdateEpic {
+    epicId: Float!
+    name: String!
+    description: String
+    startDate: Date @date
+    endDate: Date @date
+}
+
+
+
+type Query {
+    getEpics(projectId: Float): [Epic]
+    getEpic(epicId: Float): Epic
+}
+
+type Mutation {
+    createEpic(epicData: InputCreateEpic): Epic
+    updateEpic(epicData: InputUpdateEpic): Epic
+    deleteEpic(epicId: Float): Epic
+}

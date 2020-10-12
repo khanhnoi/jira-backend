@@ -1,0 +1,41 @@
+type Sprint {
+    id: ID!
+    name: String!
+    description: String!
+    startTime: Date @date
+    finishTime: Date @date
+    projectId: Float!
+    status: SprintStatus!
+    totalStoryPoint: Float!
+}
+
+enum SprintStatus {
+    Pending
+    Progress
+    Finished
+}
+
+input InputCreateSprint {
+    name: String!
+    description: String!
+    projectId: Float!
+}
+
+input InputUpdateSprint {
+    sprintId: Float!
+    name: String
+    description: String
+}
+
+type Query {
+    getSprints(projectId: Float): [Sprint]
+    getSprint(epicId: Float): Sprint
+}
+
+type Mutation {
+    createSprint(sprintData: InputCreateSprint): Sprint
+    updateSprint(sprintData: InputUpdateSprint): Sprint
+    deleteSprint(sprintId: Float): Sprint
+    startSprint(spintId: Float): Sprint
+    finishSprint(spintId: Float): Sprint
+}

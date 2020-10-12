@@ -1,0 +1,62 @@
+type Project {
+    id: ID!
+    name: String!
+    description: String!
+    status: ProjectStatus!
+    entityType: Float
+    pmId: Float
+    leaderId: Float
+    memberIds: [Float]
+    members: [User]
+}
+
+input ProjectOption {
+    status: ProjectStatus,
+    page: Float,
+    limit: Float
+}
+
+input InputCreateProject {
+    name: String!
+    description: String
+    leaderId: Float!
+    pmId: Float!
+    memberIds: [Float]
+}
+
+input InputUpdateProject {
+    id: Float!
+    pmId: Float!
+    name: String
+    description: String
+    leaderId: Float!
+    status: ProjectStatus
+    memberIds: [Float]
+}
+
+type ProjectData {
+    id: ID!
+    name: String!
+    description: String!
+    status: ProjectStatus!
+    entity_type: Float
+    pm: User
+    leader: User
+    members: [User]
+}
+type Query {
+    getProjects: [ProjectData]
+    getProject: Project
+}
+
+type Mutation {
+    createProject(projectData: InputCreateProject): Project
+    updateProject(projectData: InputUpdateProject): Project
+    deleteProject(projectId: Float): Project
+}
+
+enum ProjectStatus {
+    Pending,
+    Progress,
+    Done
+}
